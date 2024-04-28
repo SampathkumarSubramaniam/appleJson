@@ -17,7 +17,7 @@ type jsonData struct {
 
 func main() {
 	http.HandleFunc("/.well-known/com.apple.remotemanagement.json", renderJSON)
-	err := http.ListenAndServeTLS(":443", "fullchain.pem", "privkey.pem", nil)
+	err := http.ListenAndServeTLS(":443", "./fullchain.pem", "./privkey.pem", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
