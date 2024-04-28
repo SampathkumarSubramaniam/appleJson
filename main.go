@@ -2,10 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"log"
+	"net"
 	"net/http"
 	"os"
-	"log"
 )
 
 // Example JSON data structure (adjust to match your file)
@@ -18,12 +20,17 @@ type jsonData struct {
 func main() {
 	http.HandleFunc("/.well-known/com.apple.remotemanagement.json", renderJSON)
 	err := http.ListenAndServeTLS(":443", "./fullchain.pem", "./privkey.pem", nil)
+	// err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 func renderJSON(w http.ResponseWriter, r *http.Request) {
+	host, _, _ := net.SplitHostPort(r.RemoteAddr)
+	fmt.Println("Host:", host)
+
 	// Read JSON file
 	file, err := os.Open("abc.json")
 	if err != nil {
@@ -47,4 +54,5 @@ func renderJSON(w http.ResponseWriter, r *http.Request) {
 
 	// Encode and write JSON data to the response
 	json.NewEncoder(w).Encode(data)
+
 }
