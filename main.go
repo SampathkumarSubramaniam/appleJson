@@ -53,6 +53,8 @@ func renderJSON(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// Encode and write JSON data to the response
-	json.NewEncoder(w).Encode(data)
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		http.Error(w, "Error encoding JSON", http.StatusInternalServerError)
+	}
 
 }
