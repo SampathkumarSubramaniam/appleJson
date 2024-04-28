@@ -10,11 +10,16 @@ import (
 	"os"
 )
 
+
+type Server struct {
+	Version string   `json:"Version"`
+	BaseURL string   `json:"BaseURL"`
+	// Add more fields as needed based on your JSON structure
+}
+
 // Example JSON data structure (adjust to match your file)
 type jsonData struct {
 	Servers []Server `json:"Servers"`
-	Version string   `json:"Version"`
-	BaseURL string   `json:"BaseURL"`
 }
 
 func main() {
