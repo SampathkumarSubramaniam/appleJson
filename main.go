@@ -16,7 +16,7 @@ type jsonData struct {
 
 func main() {
 	http.HandleFunc("/.well-known/com.apple.remotemanagement.json", renderJSON)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":443", nil)
 }
 
 func renderJSON(w http.ResponseWriter, r *http.Request) {
