@@ -12,7 +12,7 @@ import (
 
 // Example JSON data structure (adjust to match your file)
 type jsonData struct {
-	Servers []string `json:"Servers"`
+	Servers []array `json:"Servers"`
 	Version string   `json:"Version"`
 	BaseURL string   `json:"BaseURL"`
 }
