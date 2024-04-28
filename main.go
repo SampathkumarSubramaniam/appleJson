@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"log"
 )
 
 // Example JSON data structure (adjust to match your file)
@@ -16,7 +17,10 @@ type jsonData struct {
 
 func main() {
 	http.HandleFunc("/.well-known/com.apple.remotemanagement.json", renderJSON)
-	http.ListenAndServe(":443", nil)
+	err := http.ListenAndServe(":443", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func renderJSON(w http.ResponseWriter, r *http.Request) {
